@@ -3,7 +3,7 @@ const router = new express.Router()
 const Team = require('../core/team/team')
 
 
-router.post('/create', async(req, res) => {
+router.post('/team', async(req, res) => {
     console.log("Team", req.body)
     const team = new Team(req.body)
     try {
