@@ -15,7 +15,7 @@ router.post('/create', async(req, res) => {
 })
 
 
-router.get('/event/:id', (req, res) => {
+router.get('/team/:id', (req, res) => {
     const _id = req.params.id // Access the id provided  
     Event.findById(_id).then((ev) => {
         if (!ev) {
@@ -28,9 +28,9 @@ router.get('/event/:id', (req, res) => {
 })
 
 
-router.patch('/event/:id', async(req, res) => {
+router.patch('/team/:id', async(req, res) => {
     const ups = Object.keys(req.body)
-    const allowedUpdates = ['eventtype', ' name', 'date']
+    const allowedUpdates = ['name', ' owner', 'teamFund', 'players']
     const isValOp = ups.every((update) => allowedUpdates.includes(update))
     if (!isValOp) {
         return res.status(400).send({
@@ -51,49 +51,14 @@ router.patch('/event/:id', async(req, res) => {
     }
 })
 
-router.get('/event', (req, res) => {
-    console.log("in event list")
-    Event.find({}).then((events) => {
-        res.send(events)
+router.get('/team', (req, res) => {
+    console.log("in team list")
+    Event.find({}).then((teams) => {
+        res.send(teams)
     }).catch((e) => {
         res.status(500).send()
     })
 
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// router.post('/event', async(req, res) => {
-//     const event = new Event(req.body)
-//     try {
-//         await event.save()
-//         res.status(201).send({ message: "your event has been submitted" })
-//     } catch (error) {
-//         res.status(400).send({ error })
-//     }
-// })
-
-// router.get('/event', async(req, res) => {
-//     const event = await Event.find();
-//     res.status(200).send(event)
-// })
-
-
-
 
 module.exports = router
