@@ -1,11 +1,10 @@
 const express = require('express')
-const Player = require('../core/user/player')
+const Player = require('../core/player/player')
 const router = new express.Router()
 
 router.post('/player', async(req, res) => {
     const player = new Player(req.body)
     try {
-        player.playerType = "player";
         await player.save()
         res.status(201).send(player)
     } catch (e) {
@@ -16,7 +15,7 @@ router.post('/player', async(req, res) => {
 
 router.patch('/player/me', async(req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['name', 'status', 'baseValue', 'sellPrice', 'gender', 'playerType', 'playerImages']
+    const allowedUpdates = ['name', 'status', 'baseValue', 'sellPrice', 'gender', 'playerType']
     const validateUpdates = updates.every((updates) => allowedUpdates.includes(updates))
         // console.log(validateUpdates)
     if (!validateUpdates) {
@@ -36,7 +35,7 @@ router.patch('/player/me', async(req, res) => {
 
 router.get('/player', (req, res) => {
     console.log("in player list")
-    Event.find({}).then((players) => {
+    Player.find({}).then((players) => {
         res.send(players)
     }).catch((e) => {
         res.status(500).send()

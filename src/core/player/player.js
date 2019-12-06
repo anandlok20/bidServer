@@ -15,9 +15,9 @@ const playerSchema = mongoose.Schema({
     playerType: {
         type: Array,
     },
-    playerImages: {
-        type: Blob
-    },
+    // playerImages: {
+    //     type: Blob
+    // },
     baseValue: {
         type: Number
     },

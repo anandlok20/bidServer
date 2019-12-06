@@ -7,8 +7,8 @@ router.post('/team', async(req, res) => {
     console.log("Team", req.body)
     const team = new Team(req.body)
     try {
-        await event.save()
-        res.status(201).send(event)
+        await team.save()
+        res.status(201).send(team)
     } catch (e) {
         res.status(400).send(e)
     }
@@ -53,7 +53,7 @@ router.patch('/team/:id', async(req, res) => {
 
 router.get('/team', (req, res) => {
     console.log("in team list")
-    Event.find({}).then((teams) => {
+    Team.find({}).then((teams) => {
         res.send(teams)
     }).catch((e) => {
         res.status(500).send()
