@@ -10,14 +10,13 @@ const playerSchema = mongoose.Schema({
     },
     gender: {
         type: String,
-        required: true
     },
     playerType: {
         type: Array,
     },
-    // playerImages: {
-    //     type: Blob
-    // },
+    playerImages: {
+        type: String
+    },
     baseValue: {
         type: Number
     },

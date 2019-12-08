@@ -5,6 +5,7 @@ const router = new express.Router()
 router.post('/player', async(req, res) => {
     const player = new Player(req.body)
     try {
+        console.log("save player")
         await player.save()
         res.status(201).send(player)
     } catch (e) {
@@ -35,12 +36,24 @@ router.patch('/player/me', async(req, res) => {
 
 router.get('/player', (req, res) => {
     console.log("in player list")
-    Player.find({}).then((players) => {
+    Player.find().then((players) => {
         res.send(players)
     }).catch((e) => {
-        res.status(500).send()
+        res.status(500).send(e)
     })
 
 })
+
+router.get('/player/bid', (req, res) => {
+    console.log("one player list")
+    Player.find({status:false}).then((players) => {
+        res.send(players[0])
+    }).catch((e) => {
+        res.status(500).send(e)
+    })
+
+})
+
+
 
 module.exports = router

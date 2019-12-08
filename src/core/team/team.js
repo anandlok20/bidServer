@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const validate = require('validator')
-const eventchema = mongoose.Schema({
+const teamSchema = mongoose.Schema({
 
     name: {
         type: String,
-        required: true,
     },
     owner: {
         type: String,
@@ -18,6 +17,6 @@ const eventchema = mongoose.Schema({
     }
 });
 
-const eventModel = mongoose.model('event', eventchema);
+const teamModel = mongoose.model('team', teamSchema);
 
-module.exports = eventModel;
+module.exports = teamModel;
